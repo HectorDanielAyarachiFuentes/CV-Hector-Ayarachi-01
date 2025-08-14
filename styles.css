@@ -1,0 +1,219 @@
+/* === VARIABLES Y ESTILOS GLOBALES === */
+:root {
+    --color-text-main: #333;
+    --color-text-light: #666;
+    --color-red: #e74c3c;
+    --color-orange: #e67e22;
+    --color-yellow: #f1c40f;
+    --color-green: #2ecc71;
+    --color-blue: #3498db;
+    --color-pink: #e84393;
+    --font-main: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    --transition: all 0.3s ease;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+    font-family: var(--font-main);
+    background-color: #f5f7fa;
+    color: var(--color-text-main);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 2rem;
+    line-height: 1.6;
+}
+/* === ESTRUCTURA PRINCIPAL === */
+.cv-container {
+    position: relative;
+    width: 920px;
+    height: 680px;
+    background-color: white;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.12);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+/* === ELEMENTOS CENTRALES === */
+.profile-picture {
+    position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+    width: 200px; height: 200px; z-index: 10; border: 12px solid white;
+    border-radius: 50%; box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+    background-color: #333;
+    overflow: hidden;
+    transition: var(--transition);
+}
+.profile-picture img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.profile-picture:hover { transform: translate(-50%, -50%) scale(1.05); }
+.central-circle {
+    position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+    width: 320px; height: 320px; border-radius: 50%;
+    background: linear-gradient(135deg, #f5f7fa 0%, #e4e8ed 100%);
+    z-index: 2; box-shadow: inset 0 0 20px rgba(0,0,0,0.05);
+}
+
+/* === LÍNEAS DE CONEXIÓN CON ANIMACIÓN === */
+.lines-svg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 3; }
+.lines-svg path { fill: none; stroke-width: 2px; stroke-linecap: round; stroke-dasharray: 400; stroke-dashoffset: 400; animation: draw 1s ease-out forwards; }
+.lines-svg circle { stroke-width: 2; fill: white; opacity: 0; animation: fadeIn 0.5s ease-out forwards; }
+.line-red, .pin-red { stroke: var(--color-red); }
+.line-orange, .pin-orange { stroke: var(--color-orange); }
+.line-yellow, .pin-yellow { stroke: var(--color-yellow); }
+.line-green, .pin-green { stroke: var(--color-green); }
+.line-blue, .pin-blue { stroke: var(--color-blue); }
+.line-pink, .pin-pink { stroke: var(--color-pink); }
+#line-name, #pin-name { animation-delay: 0.2s; }
+#line-profile, #pin-profile { animation-delay: 0.4s; }
+#line-work, #pin-work { animation-delay: 0.6s; }
+#line-achieve, #pin-achieve { animation-delay: 0.8s; }
+#line-skills, #pin-skills { animation-delay: 1.0s; }
+#line-edu, #pin-edu { animation-delay: 1.2s; }
+#line-hobbies, #pin-hobbies { animation-delay: 1.4s; }
+@keyframes draw { to { stroke-dashoffset: 0; } }
+@keyframes fadeIn { to { opacity: 1; transform: scale(1); } }
+
+/* === ESTILOS DE SECCIONES === */
+.cv-section {
+    position: absolute; background-color: white; padding: 1.5rem;
+    border-radius: 8px; box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+    z-index: 5; transition: var(--transition);
+}
+.cv-section:hover { transform: translateY(-5px); box-shadow: 0 8px 25px rgba(0,0,0,0.12); }
+
+/* === SOLUCIÓN DEFINITIVA APLICADA AQUÍ === */
+/* Al hacer hover, reafirmamos la posición original para que no la pierda. */
+section.hobbies:hover {
+    transform: translateX(-50%); /* ESTA ES LA LÍNEA CLAVE: Mantiene el centrado */
+    box-shadow: 0 5px 15px rgba(0,0,0,0.08); /* Mantiene la sombra original */
+}
+
+h1 { font-size: 2.0rem; font-weight: 800; line-height: 1.1; margin-bottom: 0rem; color: var(--color-red); }
+.name-flag { display: inline-block; width: 20px; height: 12px; background-color: var(--color-red); margin-left: 8px; vertical-align: middle; }
+h2 { font-size: 1.1rem; font-weight: 700; margin-bottom: 1.2rem; text-transform: uppercase; letter-spacing: 1px; position: relative; padding-bottom: 0.5rem; color: var(--section-color, var(--color-text-main)); }
+h2::after { content: ''; position: absolute; bottom: 0; left: 0; width: 40px; height: 3px; background: var(--section-color, var(--color-text-main)); }
+p, li, .item-content span { color: var(--color-text-light); font-size: 0.85rem; }
+
+/* === ICONOS CONECTORES === */
+.icon-connector {
+    position: absolute; width: 44px; height: 44px; border-radius: 50%;
+    background-color: white; display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.1); z-index: 6; font-size: 1.4rem;
+    transition: var(--transition); color: var(--section-color, var(--color-text-main));
+}
+.icon-connector:hover { transform: scale(1.1); }
+
+/* === POSICIONAMIENTO (ESCRITORIO) === */
+.cv-header-group { position: static; }
+.name-section { top: 30px; left: 20px; max-width: 320px; --section-color: var(--color-red); }
+.name-section .icon-connector { top: 50%; right: -22px; transform: translateY(-50%); }
+.work-experience { top: 190px; left: 20px; max-width: 290px; --section-color: var(--color-orange); }
+.work-experience .icon-connector { top: 50%; right: -22px; transform: translateY(-50%); }
+.skills { top: 365px; left: 20px; max-width: 290px; --section-color: var(--color-pink); }
+.skills .icon-connector { top: 50%; right: -22px; transform: translateY(-50%); }
+.personal-profile { top: 30px; right: 30px; max-width: 290px; --section-color: var(--color-red); }
+.personal-profile .icon-connector { top: 50%; left: -22px; transform: translateY(-50%); }
+.hobbies { bottom: 30px; left: 50%; transform: translateX(-50%); text-align: center; width: 240px; --section-color: var(--color-green); }
+.hobbies .icon-connector { top: -22px; left: 50%; transform: translateX(-50%); }
+.right-column-group { top: 190px; right: 30px; max-width: 290px; padding-bottom: 0.5rem; }
+.right-column-group .sub-section { padding-bottom: 1.2rem; }
+.right-column-group .sub-section:last-child { padding-bottom: 0; }
+.right-column-group .icon-connector { transform: translateY(-50%); }
+.right-column-group .trophy-icon { top: 40px; left: -22px; color: var(--color-yellow); }
+.right-column-group .education-icon { top: 135px; left: -22px; color: var(--color-blue); }
+
+/* === ESTILOS ESPECÍFICOS === */
+.item { display: flex; gap: 1rem; margin-bottom: 1.2rem; }
+.item:last-child { margin-bottom: 0; }
+.item .date { flex-shrink: 0; font-weight: 700; color: var(--color-text-main); width: 80px; font-size: 0.8rem; }
+.item-content { flex-grow: 1; }
+.item-content strong { display: block; color: var(--color-text-main); font-size: 0.9rem; }
+.skill-bars { display: grid; grid-template-columns: 1fr; gap: 1rem; }
+.skill-item span { display: block; margin-bottom: 0.3rem; font-size: 0.85rem; font-weight: 600; text-transform: uppercase; }
+.bar { width: 100%; height: 6px; background-color: #eee; border-radius: 3px; overflow: hidden; }
+.progress { height: 100%; border-radius: 3px; background: var(--color-pink); }
+.p90 { width: 90%; }
+.p80 { width: 80%; }
+.p70 { width: 70%; }
+.hobby-icons { font-size: 2.2rem; margin-top: 0.8rem; display: flex; justify-content: center; gap: 1.5rem; }
+.hobby-icons i:hover { transform: scale(1.2); color: var(--color-green); }
+.contact-info-block h2 { text-align: left; }
+.contact-info-block a { display: block; color: var(--color-text-main); text-decoration: none; transition: var(--transition); font-size: 0.9rem; text-align: left; line-height: 1.5; }
+.contact-info-block a:hover { color: var(--color-red); }
+
+/* === VERSIÓN MÓVIL === */
+@media (max-width: 950px) {
+    body { padding: 1rem; min-height: auto; }
+    
+    .cv-container { 
+        width: 100%; 
+        height: auto; 
+        display: flex; 
+        flex-direction: column; 
+        gap: 1.5rem; 
+        padding: 1.5rem; 
+        overflow: visible; 
+    }
+
+    .central-circle, .lines-svg, .icon-connector { 
+        display: none; 
+    }
+    
+    .cv-header-group {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 1rem;
+        order: -2;
+    }
+
+    .profile-picture {
+        position: static;
+        transform: none;
+        margin: 0;
+        width: 120px;
+        height: 120px;
+        border-width: 6px;
+        flex-shrink: 0;
+    }
+    
+    .profile-picture:hover {
+        transform: none;
+    }
+    
+    .cv-section { 
+        position: static; 
+        width: 100% !important; 
+        max-width: 100%; 
+        transform: none !important; 
+        box-shadow: 0 5px 15px rgba(0,0,0,0.08) !important;
+        text-align: left !important;
+    }
+    
+    .cv-section:hover {
+        transform: none !important;
+    }
+
+    .name-section {
+        box-shadow: none !important;
+        background: none;
+        padding: 0;
+    }
+
+    .name-section h1 {
+        text-align: left;
+        font-size: 1.8rem;
+    }
+    
+    .personal-profile, .right-column-group { 
+        order: -1; 
+    }
+
+    .hobbies {
+        transform: none;
+        width: 100% !important;
+    }
+}
